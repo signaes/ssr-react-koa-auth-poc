@@ -1,0 +1,53 @@
+{
+  "name": "ssr-koa-react-starter",
+  "version": "0.0.1",
+  "description": "Ecommerce prototype",
+  "main": "index.js",
+  "author": "Thiago Oliveira <thiago@signaes.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "babel-node index.js",
+    "develop": "nodemon --exec babel-node index.js",
+    "webpack:dev": "rm -r app/js/dist/*.js && webpack --mode development",
+    "webpack:prod": "rm -r app/js/dist/*.js && webpack --mode production"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-ejs": "^4.1.1",
+    "koa-logger": "^3.2.0",
+    "koa-route": "^3.2.0",
+    "koa-static": "^4.0.3",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.8.2",
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.5",
+    "sass-loader": "^7.0.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.9.1",
+    "webpack-cli": "^2.1.4"
+  }
+}
