@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter, Route, Link } from 'react-router-dom';
 import store from '../../redux/store';
 import Profile from '../scenes/Profile';
-import TodosList from '../scenes/TodosList';
+import Authentication from '../scenes/Authentication';
 
 const App = {};
 
@@ -22,10 +22,10 @@ App.Routes = () => (
   <div>
     <nav>
       <Link to='/profile'>Profile</Link>
-      <Link to='/todos'>Todos List</Link>
+      <Link to='/login'>Authentication</Link>
     </nav>
+    <Route path="/login" component={Authentication} />
     <Route path="/profile" component={Profile} />
-    <Route path="/todos" component={TodosList} />
   </div>
 );
 

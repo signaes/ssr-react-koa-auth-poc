@@ -12,6 +12,19 @@ api.root = router.get('/api', ctx => {
   };
 });
 
+api.authentication = {};
+api.authentication.get = router.get('/api/v1/authentication', ctx => {
+  ctx.body = fs.readFileSync(path.resolve('./data/authentication.json'));
+});
+api.authentication.post = router.post('/api/v1/authentication', ctx => {
+  const body = ctx.request.body;
+  const { username, password } = body;
+
+  const users = JSON.parse(fs.readFileSync(path.resolve('./data/users.json')));
+
+
+});
+
 api.profile = {};
 api.profile.get = router.get('/api/v1/profile', ctx => {
   ctx.body = fs.readFileSync(path.resolve('./data/profile.json'));
