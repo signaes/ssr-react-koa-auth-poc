@@ -1,99 +1,81 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { update } from '../../../redux/actions/profile';
-
-class TextInputRow extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: props.value,
-    };
-  }
-
-  callback = (name, value) => {
-    if (typeof this.props[name] === 'function') {
-      this.props[name](value);
-    }
-  }
-
-  onKeyUp = ({ target }) => {
-    const { value } = target;
-
-    this.setState({ value });
-    this.callback('onKeyUp', value);
-  }
-
-  onChange = ({ target }) => {
-    const { value } = target;
-
-    this.setState({ value });
-    this.callback('onChange', value);
-  }
-
-  render() {
-    const {
-      id,
-      label,
-      type = 'text',
-      placeholder = '',
-    } = this.props;
-    const { value } = this.state;
-
-    return (
-      <div className="row">
-        <label htmlFor={id}>{label}</label>
-        <input
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onKeyUp={this.onKeyUp}
-          onChange={this.onChange}
-        />
-      </div>
-    );
-  }
-}
+import { authentication } from '../../../redux/actions/authentication';
 
 const mapStateToProps = ({ authentication }) => ({
-  profile,
-  username: profile.username,
-  token: profile.token,
-  error: profile.error,
+  authentication,
+  username: authentication.username,
+  token: authentication.token,
+  error: authentication.error,
+  loggedIn: authentication.loggedIn,
 });
 
 const mapDispatchToProps = dispatch => ({
   onNameKeyUp: console.log,
   onPasswordChange: console.log,
-  onSubmit: ({ username, password }) => dispatch(authentication.login({
-    username,
-    password
-  }))
+  onLogout: username => {
+    dispatch(authentication.logout({
+      username
+    }))
+  },
+  onSubmit: e => {
+    e.preventDefault();
+
+    const elements = e.target.elements;
+    const username = elements['username'].value;
+    const password = elements['password'].value;
+
+    dispatch(authentication.login({
+      username,
+      password
+    }));
+  }
 });
+
+const LoggedInDisplay = props => (
+  <div>
+    <h1>Welcome { props.username }</h1>
+    <p>
+      Would you like to <a style={{ color: 'blue', cursor: 'pointer' }} onClick={() => props.onLogout(props.username)}>logout</a>
+    </p>
+  </div>
+);
 
 const Authentication = (props, context) => (
   <main>
+    { props.loggedIn
+      ? <LoggedInDisplay {...props} />
+      : null }
+    { props.username && !props.loggedIn
+      ? <h1>Goodbye { props.username }!</h1>
+      : null }
     <h2>Authentication</h2>
     <form onSubmit={props.onSubmit}>
-      <TextInputRow
-        id="username"
-        label="Nome"
-        type="text"
-        placeholder="Nome"
-        value={props.username}
-        onKeyUp={props.onNameKeyUp}
-      />
-      <TextInputRow
-        id="password"
-        label="password"
-        type="password"
-        placeholder="Password"
-        value={props.password}
-        onChange={props.onPasswordChange}
-      />
-      <button type="submit">Login</button>
+      <fieldset>
+        <label htmlFor="username">Username</label>
+        <input
+          id="username"
+          label="Nome"
+          type="text"
+          placeholder="Nome"
+        />
+      </fieldset>
+      <fieldset>
+        <label htmlFor="password">Password</label>
+        <input
+          id="password"
+          label="password"
+          type="password"
+          placeholder="Password"
+        />
+        <button type="submit">Login</button>
+      </fieldset>
+      { props.error
+        ? (<small style={{color: 'red'}}>{ props.error }</small>)
+        : null }
     </form>
+
   </main>
 );
 

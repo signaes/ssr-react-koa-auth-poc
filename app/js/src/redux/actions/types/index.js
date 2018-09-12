@@ -8,7 +8,7 @@ registerTypes(['UPDATE_NAME', 'UPDATE_PASSWORD', 'UPDATE_EMAIL']);
 registerTypes(['UPDATE_TODO', 'ADD_TODO', 'COMPLETE_TODO', 'REMOVE_TODO']);
 
 // Authentication
-registerTypes(['LOGIN', 'LOGOUT', 'NOT_AUTHORIZED']);
+registerTypes(['LOGIN', 'LOGOUT', 'NOT_AUTHORIZED', 'NOT_FOUND']);
 
 // Async
 registerTypes(['IS_LOADING', 'IS_NOT_LOADING']);

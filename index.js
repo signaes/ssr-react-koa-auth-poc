@@ -30,6 +30,9 @@ render(app, {
 app.use(serve('./app/js/dist'));
 
 app.use(api.root);
+app.use(api.authentication.get);
+app.use(api.authentication.post);
+app.use(api.authentication.delete);
 app.use(api.profile.get);
 app.use(api.profile.post);
 
